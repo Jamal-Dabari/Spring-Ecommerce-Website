@@ -21,18 +21,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserServiceImp implements UserDetailsService {
-
   private Long newId = 1L;
-
   @Autowired
   private UserRepository userRepository;
-
-  // @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
-
   }
 
   public User createUser(RegistrationBox registrationBox) {
@@ -47,9 +42,9 @@ public class UserServiceImp implements UserDetailsService {
 
     if (userRepository.findByEmail(user.getEmail()) == null) {
       throw new EmailAlreadyTakenException();
+    } else {
+      return userRepository.save(user);
     }
-
-    return userRepository.save(user);
   }
 
   public User loginUser(String username, String password) {
