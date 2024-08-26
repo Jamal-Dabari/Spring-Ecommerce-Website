@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fdf5df;
+  min-height: 100vh;
+  min-width: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+nav {
+  display: flex;
+  height: 50px;
+  border: 3px solid red;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
+}
+
+.main-header {
+  color: black;
+  font-size: 50px;
+  order: 3;
+  margin: auto;
+}
+
+
+
+.image-div {
+  height: 400px;
+  background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fashiongonerogue.com%2Fwp-content%2Fuploads%2F2021%2F04%2FModel-Chic-Fashion-800x534.jpg&f=1&nofb=1&ipt=b1c0487a5721936d50fb060638a6d4c44fc7e9312c7359c484fd7d2c492c9cb5&ipo=images);
+  width: 900px;
+  margin-left: 400px;
+  margin-top: 50px;
+}
+
+.main {
+  display: flex;
+  order: 5;
+  border: 3px solid blue;
+  align-self: flex-end;
+  gap: 20px;
+
+}
+
+/* unvisited link */
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: purple;
+}
+
+/* mouse over link */
+a:hover {
+  color: red;
+  background-color: grey;
+}
+
+#drp {
+  background-color: transparent;
+  color: black;
+  padding: 10px;
+  font-size: 25px;
+  margin-right: auto;
+
+}
+
+.dropdown {
+  position: fixed;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  min-width: 250px;
+  height: 100vh;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
+  z-index: 999;
+  flex-direction: column;
+}
+
+.dropdown-content li {
+  color: red;
+  width: 100%;
+  margin-left: 29px;
+  list-style: none;
+  font-family: Poppin;
+  font-size: 16px;
+  font-weight: 600px;
+  text-transform: uppercase;
+  padding-top: 20px;
+
+}
+
+
+.search-form {
+  display: flex;
+  width: 100%;
+  border: 3px solid red;
+  justify-content: center;
+  align-items: flex-end;
+
+
+}
+
+.search-form input {
+  border: none;
+  background: none;
+  outline: none;
+  box-shadow: none;
+
+}
+
+
+.products-section {
+  display: flex;
+  margin-top: 20px;
+  border: 3px solid red;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.products-section ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 3px solid red;
+
+}
+
+.products-section li {
+  text-align: center;
+}
+
+.product-separate {
+  display: flex;
+  height: 150px;
+  border: 3px solid red;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.product-separate h1 {
+  font-size: 3rem;
+}
+
+.product-card {
+  border: 3px solid red;
+  width: 250px;
+  height: 250px;
+  background-color: #d3d3d3;
+  list-style: none;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+}

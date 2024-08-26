@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eCommerce Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'>
+  <link rel="stylesheet" href="indexstyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/~/code/java/Spring/jd-ecom/src/main/resources/static/home.css">
+  <script src="/~/code/java/Spring/jd-ecom/src/main/resources/static/home.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <h1 class="header">Apollo's Revenge</h1>
+    <ul class="fmenu" id="mymenu">
+      <li class="fmenu-item">
+        <div class="trigger-menu expanded">
+          <i class="fa-regular fa-circle-user"></i>
+          <span class="text"><span th:text="${#authentication.name}"></span></span>
+        </div>
+        <ul class="floating-menu">
+          <li><a href='#'><i class="fa-regular fa-address-card"></i>Profile</a></li>
+          <li><a href='#'><i class="fa-regular fa-comment-dots"></i>Contact support</a></li>
+          <li><a href='#'><i class="fa-regular fa-money-bill-1"></i>Transactions</a></li>
+          <li><a href='#'><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+        </ul>
+      </li>
+      <li class="fmenu-item">
+        <div class="trigger-menu">
+          <i class="fa-solid fa-gear"></i>
+          <span class="text">Settings</span>
+        </div>
+        <ul class="floating-menu">
+          <li><a href='#'><i class="fa-solid fa-palette"></i>Customize theme</a></li>
+          <li><a href='#'><i class="fa-solid fa-language"></i>Language & Timezone</a></li>
+          <li><a href='#'><i class="fa-solid fa-clock-rotate-left"></i>Restore defaults</a></li>
+          <li><a href='#'><i class="fa-regu">hi</i>
+          <li><a href='#'><i class="fa-regular fa-clock-rotate-left"></i>Restore defaults</a></li>
+        </ul>
+      </li>
+      <li class="fmenu-item">
+        <div class="trigger-menu">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="text">Cart</span>
+        </div>
+        <ul class="floating-menu">
+          <li><a href='#'><i class="fa-solid fa-eye"></i>View Cart</a></li>
+          <li><a href='#'><i class="fa-solid fa-money-check-dollar"></i>Checkout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="Product 1">
+      <h3>Product 1</h3>
+      <p>$29.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="Product 2">
+      <h3>Product 2</h3>
+      <p>$39.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="Product 3">
+      <h3>Product 3</h3>
+      <p>$49.99</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</body>
+
+</html>

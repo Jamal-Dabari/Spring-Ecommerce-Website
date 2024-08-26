@@ -1,0 +1,170 @@
+   @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+   html,
+   body {
+     width: 100%;
+     height: 100%;
+   }
+
+   nav {
+     display: flex;
+   }
+
+   nav ul,
+   li {
+     justify-content: flex-end;
+   }
+
+   .navbar h1 {
+     position: absolute;
+     background-color: #fdf5df;
+     color: Black;
+     text-align: center;
+     font-family: "Montserrat";
+     font-size: 50px;
+     margin: 0px;
+     padding: 00px 10px;
+     left: 30%;
+   }
+
+   .navbar {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     justify-items: right;
+     background: transparent;
+   }
+
+   body {
+     font-family: Montserrat, "sans-serif" !important;
+     background: #fdf5df;
+     padding: 0rem;
+   }
+
+
+   .montserrat-mn {
+     font-family: "Montserrat", sans-serif;
+     font-optical-sizing: auto;
+     font-weight: 1;
+     font-style: normal;
+   }
+
+   /*********************************************
+Floating Menu:
+**********************************************/
+   ul.fmenu {
+     color: #fff;
+     list-style: none;
+     padding: 0px 40px 20px;
+     margin: 0;
+     white-space: nowrap;
+     justify-content: flex-end;
+   }
+
+   ul.fmenu>li.fmenu-item {
+     display: inline-block;
+     margin-right: 1rem;
+     position: relative;
+
+   }
+
+   ul.fmenu .trigger-menu {
+     display: flex;
+     align-content: center;
+     align-items: center;
+     box-sizing: border-box;
+     min-width: 3rem;
+     max-width: 3rem;
+     height: 3rem;
+     border: 0.45rem solid transparent;
+     border-radius: 3rem;
+     overflow: hidden;
+     text-align: center;
+     background-color: #505050;
+     cursor: pointer;
+     transition: max-width ease 0.4s;
+   }
+
+   ul.fmenu .trigger-menu i {
+     display: block;
+     margin: 0 0.2925rem;
+     color: white;
+     font-size: 1.5rem;
+     transition: color ease 0.3s;
+   }
+
+   ul.fmenu .trigger-menu span {
+     display: block;
+     font-size: 1rem;
+     padding: 0 1ch;
+   }
+
+   ul.fmenu .trigger-menu.expanded {
+     max-width: unset !important;
+   }
+
+   ul.fmenu .trigger-menu.open i {
+     color: #ffd53e;
+   }
+
+   ul.fmenu .trigger-menu:hover:not(.expanded) i {
+     color: #ffd53e;
+   }
+
+   ul.fmenu .floating-menu {
+     display: block;
+     position: absolute;
+     top: 3.75rem;
+     min-width: 100%;
+     max-width: 250px;
+     list-style: none;
+     padding: 0;
+     margin: 0;
+     background-color: #505050;
+     border-radius: 0.75rem;
+     overflow: hidden;
+     max-height: 0px;
+     z-index: 100;
+     opacity: 0;
+     transition: max-height ease 0.6s, opacity ease 0.3s;
+   }
+
+   ul.fmenu .floating-menu>li {
+     padding: 0 0.5rem;
+   }
+
+   ul.fmenu .floating-menu>li a {
+     color: #fff;
+     font-size: 0.85rem;
+     text-decoration: none;
+     display: block;
+     padding: 0.75rem 0.5rem;
+   }
+
+   ul.fmenu .floating-menu>li a i {
+     margin-right: 1ch;
+   }
+
+   ul.fmenu .floating-menu>li a:hover {
+     color: #ffd53e;
+   }
+
+   ul.fmenu .floating-menu>li:not(:last-child) a {
+     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+   }
+
+
+
+   .main-content {
+     display: flex;
+     justify-content: space-between;
+     border-color: black;
+     padding-top: 40px;
+   }
+
+   .main-content p,
+   h3 {
+     text-align: center;
+     justify-content: center;
+     align-items: center;
+   }

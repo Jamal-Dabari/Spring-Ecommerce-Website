@@ -5,7 +5,7 @@ import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.UserRepository;
 import com.ecommerce.project.exceptions.EmailNotFoundException;
-import com.ecommerce.project.config.SecurityConfig;
+//import com.ecommerce.project.config.SecurityConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,7 +25,8 @@ public class UserServiceImp implements UserDetailsService {
   private Long newId = 1L;
   @Autowired
   private UserRepository userRepository;
-  private BCryptPasswordEncoder passwordEncoder;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
@@ -37,8 +39,8 @@ public class UserServiceImp implements UserDetailsService {
     user.setFname(registrationBox.getFname());
     user.setLname(registrationBox.getLname());
     user.setEmail(registrationBox.getEmail());
-    user.setPassword(registrationBox.getPassword());
-    user.setRole(registrationBox.getRole());
+    String encodedPassword = passwordEncoder.encode(registrationBox.getPassword());
+    user.setPassword(encodedPassword);
 
     if (userRepository.findByEmail(user.getEmail()) == null) {
       throw new EmailAlreadyTakenException();
@@ -47,8 +49,8 @@ public class UserServiceImp implements UserDetailsService {
     }
   }
 
-  public User loginUser(String username, String password) {
-    User user = userRepository.findByUsername(username);
+  public UserDetails loginUser(String username, String password) {
+    UserDetails user = userRepository.findByUsername(username);
 
     if (user != null && passwordEncoder.matches(password, user.getPassword())) {
       return user;

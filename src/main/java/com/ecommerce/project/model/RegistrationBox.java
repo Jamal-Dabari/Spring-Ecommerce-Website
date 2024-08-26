@@ -1,22 +1,18 @@
 package com.ecommerce.project.model;
 
-import com.ecommerce.project.model.Role;
-
 public class RegistrationBox {
   private String username;
   private String fname;
   private String lname;
   private String password;
   private String email;
-  private Role role;
 
-  public RegistrationBox(String fname, String lname, String password, String email, String username, Role role) {
+  public RegistrationBox(String fname, String lname, String password, String email, String username) {
     this.fname = fname;
     this.lname = lname;
     this.password = password;
     this.email = email;
     this.username = username;
-    this.role = role;
   }
 
   public RegistrationBox() {
@@ -61,14 +57,6 @@ public class RegistrationBox {
 
   public void setUsername(String username) {
     this.username = username;
-  }
-
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
   }
 
 }

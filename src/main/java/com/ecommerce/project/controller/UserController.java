@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.project.service.UserServiceImp;
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
@@ -20,7 +20,6 @@ import com.ecommerce.project.exceptions.UsernameNotFoundException;
 import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
 
-@RestController
 @Controller
 @RequestMapping("/auth")
 public class UserController {
@@ -51,19 +50,19 @@ public class UserController {
     return "redirect:/";
   }
 
-  @GetMapping("/login")
-  public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
-    /*
-     * try {
-     * User user = userService.loginUser(username, password);
-     * return new ResponseEntity<>("User Logged in", HttpStatus.OK);
-     * } catch (UsernameNotFoundException e) {
-     * return new ResponseEntity<>("Invalid username or password",
-     * HttpStatus.UNAUTHORIZED);
-     * }
-     */
+  @PostMapping("/public/login")
+  public String loginUser(@RequestParam String username, @RequestParam String password) {
+    try {
+      UserDetails user = userService.loginUser(username, password); // Change to UserDetails
+      return "redirect:/";
+    } catch (UsernameNotFoundException e) {
+      return "fail";
+    }
+  }
 
-    userService.loadUserByUsername(username);
+  @GetMapping("/public/login")
+  public String loginPage() {
+    return "Login";
   }
 
   @GetMapping("/success")
