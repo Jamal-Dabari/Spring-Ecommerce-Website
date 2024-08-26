@@ -2,7 +2,7 @@
 
 Welcome to the Springbok E-Commerce Website project! This application is a fully functional e-commerce platform built with Spring Boot, Spring Security, HTML, JavaScript, and CSS. The project aims to provide a secure and scalable online shopping experience.
 
-##Table of Contents
+## Table of Contents
 
 - Features
 - Technologies Used
