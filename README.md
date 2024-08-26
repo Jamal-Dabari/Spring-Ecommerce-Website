@@ -14,7 +14,8 @@ Welcome to the Springbok E-Commerce Website project! This application is a fully
 - Contact
 - Features
 
-User Authentication and Authorization: Secure login and registration with Spring Security.
+User Authentication and Authorization:
+Secure login and registration with Spring Security.
 Product Management: View, search, and filter products.
 Shopping Cart: Add products to the cart and manage items.
 Order Processing: Checkout process with order summary and confirmation.
