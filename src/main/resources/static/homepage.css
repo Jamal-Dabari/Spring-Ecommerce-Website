@@ -25,14 +25,20 @@ nav {
   margin: auto;
 }
 
+.image-container {
+  width: 100%;
+  border: 3px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 .image-div {
   height: 400px;
   background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fashiongonerogue.com%2Fwp-content%2Fuploads%2F2021%2F04%2FModel-Chic-Fashion-800x534.jpg&f=1&nofb=1&ipt=b1c0487a5721936d50fb060638a6d4c44fc7e9312c7359c484fd7d2c492c9cb5&ipo=images);
-  width: 900px;
-  margin-left: 400px;
-  margin-top: 50px;
+  width: 50%;
+  margin-top: 20px;
 }
 
 .main {
