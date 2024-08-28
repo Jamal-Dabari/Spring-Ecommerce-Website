@@ -4,18 +4,32 @@
 }
 
 body {
-  background-color: #fdf5df;
+  background-color: #edede9;
   min-height: 100vh;
   min-width: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #d5bdaf;
 
 }
 
 nav {
+  background-color: #d6ccc2;
   display: flex;
-  height: 50px;
+  height: 30px;
   border: 3px solid red;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
+  justify-content: space-between;
+  position: fixed;
+  width: 95%;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+nav img {
+  height: 100%;
+  width: 25%;
+  margin-left: 600px;
 }
 
 .main-header {
@@ -36,9 +50,31 @@ nav {
 
 .image-div {
   height: 400px;
-  background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fashiongonerogue.com%2Fwp-content%2Fuploads%2F2021%2F04%2FModel-Chic-Fashion-800x534.jpg&f=1&nofb=1&ipt=b1c0487a5721936d50fb060638a6d4c44fc7e9312c7359c484fd7d2c492c9cb5&ipo=images);
   width: 50%;
   margin-top: 20px;
+  border: 3px solid red;
+  display: flex;
+  border-radius: 30px;
+}
+
+.image-div img {
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+
+}
+
+.image-changer {
+  border: 3px solid blue;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-changer span {
+  background: grey;
 }
 
 .main {
@@ -47,7 +83,6 @@ nav {
   border: 3px solid blue;
   align-self: flex-end;
   gap: 20px;
-
 }
 
 /* unvisited link */
@@ -70,15 +105,14 @@ a:hover {
 #drp {
   background-color: transparent;
   color: black;
-  padding: 10px;
   font-size: 25px;
   margin-right: auto;
-
 }
 
 .dropdown {
   position: fixed;
-  display: inline-block;
+  display: flex;
+  align-items: flex-end;
 }
 
 .dropdown-content {
@@ -92,6 +126,10 @@ a:hover {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
   z-index: 999;
   flex-direction: column;
+}
+
+.dropdown-content label {
+  align-self: center;
 }
 
 .dropdown-content li {
@@ -169,12 +207,32 @@ a:hover {
 .product-card {
   border: 3px solid red;
   width: 250px;
-  height: 250px;
+  height: 450px;
   background-color: #d3d3d3;
   list-style: none;
+  border-radius: 30px;
+}
+
+.product-card img {
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+
 }
 
 .product-card h3 {
   font-size: 20px;
   font-weight: 600;
+}
+
+
+
+footer {
+  border: 3px solid red;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #e3d5ca;
 }
