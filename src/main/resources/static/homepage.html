@@ -33,15 +33,14 @@
 <body>
   <!-- navigation bar --->
   <nav class="navbar">
-    <img src="Untitled design.png" alt="">
+    <img src="dabari-ecom-high-resolution-logo-transparent.png" alt="" height="25px" width="100px">
     <div class="dropdown">
-      <span onclick=showsidebar() class="material-symbols-outlined" , id="drp"> menu </span>
+      <span onclick=showsidebar() class="material-symbols-outlined" id="drp"> menu </span>
       <div class="dropdown-content">
         <form class="search-form" role="search" method="get">
-          <label>
-            <input type="search" placeholder="search" value="">
-          </label>
-          <span onclick=hidesidebar() style="margin-left: 60px;" class="material-symbols-outlined">close</span>
+          <label for="search">Search</label>
+          <input type="search" placeholder="search" value="">
+          <span onclick=hidesidebar() class="material-symbols-outlined" id="close-button">close</span>
         </form>
         <li><a href="#">Home</a></li>
         <li><a href="#">Shop</a></li>
@@ -51,7 +50,7 @@
         <li class="bottom"><a href="#">Cart</a></li>
       </div>
     </div>
-    <div class="main">
+    <div class="action-buttons">
       <a href="Templates/Login.html"> <span class="material-symbols-outlined">
           account_circle
         </span></a>
@@ -59,27 +58,34 @@
           shopping_cart
         </span>
       </a>
-      <a href="/search"><span class="material-symbols-outlined">search</span></a>
+      <a href="/search"><span class="material-symbols-outlined" id="search-button">search</span></a>
     </div>
 
   </nav>
+  <div class="search-fullscreen">
+    <form class="search-form" role="search" method="get">
+      <input type="search" placeholder="search" value="">
+      <span onclick=hidesidebar() class="material-symbols-outlined" id="close-button">close</span>
+    </form>
+  </div>
 
   <!-- main content --->
   <div class="image-container">
     <div class="image-changer">
-      <span class="material-symbols-outlined">
+      <span onclick=prevImage() class="material-symbols-outlined" id="change-arrow">
         arrow_back_ios
       </span>
     </div>
 
     <div class="image-div">
-      <img
+      <img id="myImage"
         src="https://media.istockphoto.com/id/1278592190/photo/blank-black-and-white-sport-hoodie-with-hood-mockup-set.jpg?s=2048x2048&w=is&k=20&c=vYgB3T0vUBeugGr4oVDQuz86uWbb8np5dsG7MT2O0zo="
         alt="">
+      <button id="discover-button">DISCOVER MORE</button>
     </div>
 
     <div class="image-changer">
-      <span class="material-symbols-outlined">
+      <span onclick=nextImage() class="material-symbols-outlined" id="change-arrow">
         arrow_forward_ios
       </span>
     </div>
@@ -87,8 +93,19 @@
 
   <!-- main products --->
   <div class="product-separate">
-    <h1>New Arrivals</h1>
+    <h1>Women's</h1>
   </div>
+
+  <div class="product-hero">
+    <img src="generic-model.jpg" alt="">
+    <button id="shop-button1">Shop Now</button>
+    <button id="shop-button2">Shop Now</button>
+    <img src="generic-model2.jpg" alt="">
+    <p id="text-1">Women's Buisness</p>
+    <p id="text-2">Women's Style</p>
+  </div>
+
+
   <div class="products-section">
     <ul class="product-list">
       <li>
@@ -98,7 +115,6 @@
         <h3>
           <a href="">Shirts</a>
         </h3>
-        <span>150.00</span>
       </li>
       <li>
         <div class="product-card"><img
@@ -107,7 +123,6 @@
         <h3>
           <a href="">Pants</a>
         </h3>
-        <span>150.00</span>
       </li>
       <li>
         <div class="product-card"><img
@@ -116,7 +131,6 @@
         <h3>
           <a href="">Hoodies</a>
         </h3>
-        <span>150.00</span>
       </li>
       <li>
         <div class="product-card"><img
@@ -125,10 +139,56 @@
         <h3>
           <a href="">Shoes</a>
         </h3>
-        <span>150.00</span>
       </li>
     </ul>
   </div>
+
+  <div class="product-separate">
+    <h1>Men's</h1>
+  </div>
+
+
+
+  <div class="image-container">
+    <div class="image-div2">
+      <img src="generic-male-model1.jpg" alt="">
+      <p>New Arrivals</p>
+      <button id="discover-button">DISCOVER MORE</button>
+    </div>
+  </div>
+
+
+  <div class="products-section">
+    <ul class="product-list">
+      <li>
+        <div class="product-card"><img src="" alt=""></div>
+        <p>shirts</p>
+      </li>
+      <li>
+        <div class="product-card"><img src="" alt=""></div>
+        <p>Pants</p>
+      </li>
+      <li>
+        <div class="product-card"><img src="" alt=""></div>
+        <p>Hoodies</p>
+      </li>
+      <li>
+        <div class="product-card"><img src="" alt=""></div>
+        <p>shoes</p>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="call-to-action">
+    <h1>Exclusive Fashion at DABARI ECOM – Shop Now and Elevate Your Wardrobe!<br>
+      At DABARI ECOM, we specialize in stylish, high-quality clothing for every occasion.<br> From casual wear to the
+      latest
+      trends, we offer a curated selection that suits your style.<br> Experience effortless shopping and fast delivery –
+      join the DABARI ECOM fashion community today!"
+    </h1>
+  </div>
+
 
   <script>
     function showsidebar() {
@@ -140,28 +200,41 @@
       const sidebar = document.querySelector('.dropdown-content')
       sidebar.style.display = 'none'
     }
-  </script>
+    // Array of image sources
+    var images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
 
+    // Current index of the image being displayed
+    var currentIndex = 0;
+
+    // Function to show the next image
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById('myImage').src = images[currentIndex];
+    }
+
+    // Function to show the previous image
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      document.getElementById('myImage').src = images[currentIndex];
+    }
+  </script>
 </body>
 
 <footer>
-
-  About Us<br>
-  We are committed to providing you with the best shopping experience. Our products are carefully selected to meet your
-  needs, ensuring quality and value in every purchase.
-
-  Customer Service
+  <h1>About Us</h1>
+  <p>
+    We are committed to providing you with the best shopping experience. Our products are carefully selected to meet
+    your
+    needs, ensuring quality and value in every purchase.
+  <h2>Customer Service</h2>
   Have questions? Our support team is here to help. Reach out to us at email@example.com or call us at (123) 456-7890.
-
-  Follow Us
+  <h2>Follow Us</h2>
   Stay connected with us on social media for the latest updates and exclusive deals:
   Facebook | Instagram | Twitter
-
-  Newsletter
+  <h2>Newsletter</h2>
   Sign up for our newsletter to receive special offers and the latest news straight to your inbox.
-
+  </p>
   Quick Links
-
   <ul>
     <li> Home </li>
     <li> Shop</li>
@@ -170,13 +243,15 @@
     <li> Privacy Policy</li>
     <li> Terms & Conditions</li>
   </ul>
-
-  Secure Shopping
-  Your security is our priority. Shop with confidence knowing your information is protected by industry-leading
-  encryption.
-
-  © 2024 YourCompanyName. All rights reserved.
-
+  <p>
+    Secure Shopping
+    Your security is our priority. Shop with confidence knowing your information is protected by industry-leading
+    encryption.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque explicabo facilis,
+    qui exercitationem recusandae natus voluptatibus facere corrupti quo aut hic. Deleniti optio odio numquam
+    tempore iure asperiores maxime quasi!
+    © 2024 YourCompanyName. All rights reserved.
+  </p>
 </footer>
 
 </html>
