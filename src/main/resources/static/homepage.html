@@ -26,14 +26,14 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link rel="stylesheet" href=homepage.css />
+  <link rel="stylesheet" href=css/homepage.css />
 </head>
 
 
 <body>
   <!-- navigation bar --->
   <nav class="navbar">
-    <img src="dabari-ecom-high-resolution-logo-transparent.png" alt="" height="25px" width="100px">
+    <img src="images/dabari-ecom-high-resolution-logo-transparent.png" alt="" height="25px" width="100px">
     <div class="dropdown">
       <span onclick=showsidebar() class="material-symbols-outlined" id="drp"> menu </span>
       <div class="dropdown-content">
@@ -50,23 +50,33 @@
         <li class="bottom"><a href="#">Cart</a></li>
       </div>
     </div>
+
     <div class="action-buttons">
-      <a href="Templates/Login.html"> <span class="material-symbols-outlined">
-          account_circle
-        </span></a>
-      <a href="/cart"><span class="material-symbols-outlined">
-          shopping_cart
-        </span>
-      </a>
-      <a href="/search"><span class="material-symbols-outlined" id="search-button">search</span></a>
+      <span onclick=openUser() class="material-symbols-outlined">account_circle</span>
+      <span onclick=openCart() class="material-symbols-outlined">shopping_cart</span>
+      <span onclick=openSearch() class="material-symbols-outlined" id="search-button">search</span>
     </div>
 
   </nav>
   <div class="search-fullscreen">
     <form class="search-form" role="search" method="get">
       <input type="search" placeholder="search" value="">
-      <span onclick=hidesidebar() class="material-symbols-outlined" id="close-button">close</span>
+      <span onclick=closeSearch() class="material-symbols-outlined" id="close-button">close</span>
     </form>
+    <h1>Suggestions</h1>
+    <p>Trending</p>
+    <p>New Arrivals</p>
+    <p>Back in stock</p>
+  </div>
+
+  <div class="cart-fullscreen">
+    <h1>hi</h1>
+    <span onclick=closeCart() class="material-symbols-outlined" id="close-button">close</span>
+  </div>
+
+  <div class="user-fullscreen">
+    <h1>hi</h1>
+    <span onclick=closeUser() class="material-symbols-outlined" id="close-button">close</span>
   </div>
 
   <!-- main content --->
@@ -97,10 +107,10 @@
   </div>
 
   <div class="product-hero">
-    <img src="generic-model.jpg" alt="">
+    <img src="images/generic-model.jpg" alt="">
     <button id="shop-button1">Shop Now</button>
     <button id="shop-button2">Shop Now</button>
-    <img src="generic-model2.jpg" alt="">
+    <img src="images/generic-model2.jpg" alt="">
     <p id="text-1">Women's Buisness</p>
     <p id="text-2">Women's Style</p>
   </div>
@@ -151,7 +161,7 @@
 
   <div class="image-container">
     <div class="image-div2">
-      <img src="generic-male-model1.jpg" alt="">
+      <img src="images/generic-male-model1.jpg" alt="">
       <p>New Arrivals</p>
       <button id="discover-button">DISCOVER MORE</button>
     </div>
@@ -201,7 +211,7 @@
       sidebar.style.display = 'none'
     }
     // Array of image sources
-    var images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
+    var images = ['images/image1.jpg', 'images/image2.jpg', 'images/image3.jpg', 'images/image4.jpg'];
 
     // Current index of the image being displayed
     var currentIndex = 0;
@@ -217,6 +227,40 @@
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       document.getElementById('myImage').src = images[currentIndex];
     }
+
+    function openSearch() {
+      const search = document.querySelector('.search-fullscreen')
+      search.style.display = 'flex'
+    }
+
+    function closeSearch() {
+      const search = document.querySelector('.search-fullscreen')
+      search.style.display = 'none'
+
+    }
+
+    function openUser() {
+      const search = document.querySelector('.user-fullscreen')
+      search.style.display = 'flex'
+    }
+
+    function closeUser() {
+      const search = document.querySelector('.user-fullscreen')
+      search.style.display = 'none'
+
+    }
+
+    function openCart() {
+      const search = document.querySelector('.cart-fullscreen')
+      search.style.display = 'flex'
+    }
+
+    function closeCart() {
+      const search = document.querySelector('.cart-fullscreen')
+      search.style.display = 'none'
+
+    }
+
   </script>
 </body>
 
