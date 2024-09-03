@@ -5,4 +5,8 @@ public class ProductDoesNotExistException extends RuntimeException {
     super("Product Does Not Exist");
   }
 
+  public ProductDoesNotExistException(String message) {
+    super(message);
+  }
+
 }

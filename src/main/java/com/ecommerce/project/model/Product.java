@@ -13,11 +13,13 @@ public class Product {
   private Long productId;
   private String productName;
   private Double productPrice;
+  private Long productQuantity;
 
-  public Product(Long productId, String productName, Double productPrice) {
+  public Product(Long productId, String productName, Double productPrice, Long productQuantity) {
     this.productId = productId;
     this.productName = productName;
     this.productPrice = productPrice;
+    this.productQuantity = productQuantity;
   }
 
   public Product() {
@@ -46,6 +48,14 @@ public class Product {
 
   public void setProductPrice(Double productPrice) {
     this.productPrice = productPrice;
+  }
+
+  public Long getProductQuantity() {
+    return productQuantity;
+  }
+
+  public void setProductQuantity(Long productQuantity) {
+    this.productQuantity = productQuantity;
   }
 
 }

@@ -14,4 +14,6 @@ public interface ProductService {
 
   Product updateProduct(Product product, Long productId);
 
+  void reduceQuantity(long productId, long quantity);
+
 }
