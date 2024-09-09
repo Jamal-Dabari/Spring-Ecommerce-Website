@@ -34,4 +34,14 @@ public class CartServiceImp implements CartService {
     cart.setQuantity(cart.getQuantity() - 1);
     cartRepository.delete(cart);
   }
+
+  @Override
+  public Cart getCartById(Long cartId) {
+    return cartRepository.findByCartId(cartId);
+  }
+
+  @Override
+  public Cart createCart(Cart cart) {
+    return cartRepository.save(cart);
+  }
 }

@@ -1,12 +1,10 @@
 package com.ecommerce.project.service;
 
-import com.ecommerce.project.DTO.UserDTO;
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
 import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.UserRepository;
 import com.ecommerce.project.exceptions.EmailNotFoundException;
-//import com.ecommerce.project.config.SecurityConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
