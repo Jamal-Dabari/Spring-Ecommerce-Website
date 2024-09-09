@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.project.exceptions.ProductDoesNotExistException;
 import com.ecommerce.project.model.Product;
+import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.repositories.ProductRepository;
 
 @Service
@@ -19,6 +20,9 @@ public class ProductServiceImp implements ProductService {
 
   @Autowired
   private ProductRepository productRepository;
+
+  @Autowired
+  private CategoryRepository categoryRepository;
 
   @Override
   public List<Product> getAllProducts() {
@@ -31,6 +35,8 @@ public class ProductServiceImp implements ProductService {
     product.setProductName(product.getProductName());
     product.setProductPrice(product.getProductPrice());
     product.setProductQuantity(product.getProductQuantity());
+    product.setCategory(product.getCategory());
+    categoryRepository.save(product.getCategory());
     productRepository.save(product);
   }
 

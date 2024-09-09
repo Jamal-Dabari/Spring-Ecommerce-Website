@@ -1,9 +1,12 @@
 package com.ecommerce.project.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "Products")
 public class Product {
@@ -15,11 +18,22 @@ public class Product {
   private Double productPrice;
   private Long productQuantity;
 
-  public Product(Long productId, String productName, Double productPrice, Long productQuantity) {
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "cart_id")
+  private Cart cart;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id")
+  private Category category;
+
+  public Product(Long productId, String productName, Double productPrice, Long productQuantity, Cart cart,
+      Category category) {
     this.productId = productId;
     this.productName = productName;
     this.productPrice = productPrice;
     this.productQuantity = productQuantity;
+    this.category = category;
+    this.cart = cart;
   }
 
   public Product() {
@@ -56,6 +70,22 @@ public class Product {
 
   public void setProductQuantity(Long productQuantity) {
     this.productQuantity = productQuantity;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+  public Cart getCart() {
+    return cart;
+  }
+
+  public void setCart(Cart cart) {
+    this.cart = cart;
   }
 
 }

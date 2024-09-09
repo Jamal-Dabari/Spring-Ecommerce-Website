@@ -1,5 +1,6 @@
 package com.ecommerce.project.service;
 
+import com.ecommerce.project.DTO.UserDTO;
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
 import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
