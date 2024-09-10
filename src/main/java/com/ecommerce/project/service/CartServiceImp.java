@@ -10,6 +10,8 @@ import com.ecommerce.project.repositories.CartRepository;
 @Service
 public class CartServiceImp implements CartService {
 
+  private Long newId = 1L;
+
   @Autowired
   private CartRepository cartRepository;
 
@@ -42,6 +44,10 @@ public class CartServiceImp implements CartService {
 
   @Override
   public Cart createCart(Cart cart) {
+    cart.setUser(cart.getUser());
+    cart.setCartId(newId++);
+    cart.setProducts(cart.getProducts());
+    cart.setQuantity(cart.getQuantity());
     return cartRepository.save(cart);
   }
 }

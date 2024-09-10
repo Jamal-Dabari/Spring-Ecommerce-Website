@@ -1,7 +1,6 @@
 package com.ecommerce.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.project.model.Cart;
-import com.ecommerce.project.model.Category;
 import com.ecommerce.project.model.Product;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.service.CartService;
-import com.ecommerce.project.service.CategoryService;
-import com.ecommerce.project.service.ProductService;
 import com.ecommerce.project.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/cart")
@@ -27,13 +25,7 @@ public class CartController {
   private CartService cartService;
 
   @Autowired
-  private UserService UserService;
-
-  @Autowired
-  private ProductService productService;
-
-  @Autowired
-  private CategoryService categoryService;
+  UserService userService;
 
   @GetMapping("/cart/{cart_id}")
   public Double getTotalPrice(@PathVariable long cartId) {
@@ -56,9 +48,15 @@ public class CartController {
   }
 
   @PostMapping("/api/v1/cart/create-cart")
-  public Cart createCart(@RequestBody Cart cart) {
-    UserDetails user = UserService.loadUserByUsername(user.getUsername());
-    return cart;
+  public Cart createCart(@RequestBody Cart cart, HttpSession session) {
+    String username = (String) session.getAttribute("username");
+
+    if (username != null) {
+      User currentUser = (User) userService.loadUserByUsername(username);
+      cart.setUser(currentUser);
+    }
+
+    return cartService.createCart(cart);
   }
 
 }
