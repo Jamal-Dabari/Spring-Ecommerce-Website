@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,16 +13,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.project.DTO.ProductDTO;
 import com.ecommerce.project.exceptions.ProductDoesNotExistException;
+import com.ecommerce.project.model.Category;
 import com.ecommerce.project.model.Product;
+import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.service.ProductService;
 
 @RestController
-@Controller
 public class ProductController {
 
   @Autowired
   private ProductService productServiceImp;
+
+  @Autowired
+  private CategoryRepository categoryRepository;
 
   @GetMapping("/products")
   public String showProductPage() {
@@ -42,7 +46,15 @@ public class ProductController {
   }
 
   @PostMapping("/public/product")
-  public ResponseEntity<String> createProduct(@RequestBody Product product) {
+  public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
+    Product product = new Product();
+    if (productDTO.getCategoryId() != null) {
+      Category category = categoryRepository.findById(productDTO.getCategoryId())
+          .orElseThrow(() -> new RuntimeException("Category Not Found"));
+      product.setCategory(category);
+    } else {
+      product.setCategory(null);
+    }
     productServiceImp.createProduct(product);
     return new ResponseEntity<>("Product Created", HttpStatus.CREATED);
   }

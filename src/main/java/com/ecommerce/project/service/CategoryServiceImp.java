@@ -28,6 +28,7 @@ public class CategoryServiceImp implements CategoryService {
   @Override
   public void createCategory(Category category) {
     category.setCategoryId(nextId++);
+    category.setName(category.getName());
     categoryRepository.save(category);
   }
 

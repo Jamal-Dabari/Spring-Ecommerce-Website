@@ -8,7 +8,7 @@ public class HomeController {
 
   @RequestMapping("/")
   public String hello() {
-    return "homepage.html";
+    return "redirect:/homepage.html";
   }
 
 }

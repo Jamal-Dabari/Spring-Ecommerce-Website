@@ -3,6 +3,8 @@ package com.ecommerce.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,6 +30,10 @@ public class Category {
 
   public Category() {
 
+  }
+
+  public int getProductCount() {
+    return products != null ? products.size() : 0;
   }
 
   public Long getCategoryId() {

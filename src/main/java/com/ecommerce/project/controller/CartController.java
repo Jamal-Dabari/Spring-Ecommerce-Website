@@ -13,7 +13,7 @@ import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.Product;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.service.CartService;
-import com.ecommerce.project.service.UserService;
+import com.ecommerce.project.service.UserServiceImp;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,7 +25,7 @@ public class CartController {
   private CartService cartService;
 
   @Autowired
-  UserService userService;
+  private UserServiceImp userService;
 
   @GetMapping("/cart/{cart_id}")
   public Double getTotalPrice(@PathVariable long cartId) {
