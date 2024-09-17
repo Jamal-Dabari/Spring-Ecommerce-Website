@@ -32,11 +32,11 @@ public class ProductServiceImp implements ProductService {
   @Override
   public void createProduct(Product product) {
     product.setProductId(nextId++);
-    product.setProductName(product.getProductName());
-    product.setProductPrice(product.getProductPrice());
-    product.setProductQuantity(product.getProductQuantity());
-    product.setCategory(product.getCategory());
-    categoryRepository.save(product.getCategory());
+    // product.setProductName(product.getProductName());
+    // product.setProductPrice(product.getProductPrice());
+    // product.setProductQuantity(product.getProductQuantity());
+    // product.setCategory(product.getCategory());
+    // categoryRepository.save(product.getCategory());
     productRepository.save(product);
   }
 

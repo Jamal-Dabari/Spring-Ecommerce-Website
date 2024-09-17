@@ -55,6 +55,10 @@ public class ProductController {
     } else {
       product.setCategory(null);
     }
+
+    product.setProductName(productDTO.getName());
+    product.setProductPrice(productDTO.getPrice());
+    product.setProductQuantity(productDTO.getProductQuantity());
     productServiceImp.createProduct(product);
     return new ResponseEntity<>("Product Created", HttpStatus.CREATED);
   }
