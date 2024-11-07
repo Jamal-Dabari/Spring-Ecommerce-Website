@@ -19,21 +19,16 @@ public class Product {
   private Long productQuantity;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cart_id")
-  private Cart cart;
-
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "category_id")
   private Category category;
 
-  public Product(Long productId, String productName, Double productPrice, Long productQuantity, Cart cart,
+  public Product(Long productId, String productName, Double productPrice, Long productQuantity,
       Category category) {
     this.productId = productId;
     this.productName = productName;
     this.productPrice = productPrice;
     this.productQuantity = productQuantity;
     this.category = category;
-    this.cart = cart;
   }
 
   public Product() {
@@ -78,14 +73,6 @@ public class Product {
 
   public void setCategory(Category category) {
     this.category = category;
-  }
-
-  public Cart getCart() {
-    return cart;
-  }
-
-  public void setCart(Cart cart) {
-    this.cart = cart;
   }
 
 }

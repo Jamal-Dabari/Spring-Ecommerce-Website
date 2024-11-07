@@ -18,19 +18,19 @@ public class Cart {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long cartId;
-  private int quantity;
 
   @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  private List<Product> products = new ArrayList<>();
+  private List<CartItem> items = new ArrayList<>();
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id")
   private User user;
 
-  public Cart(Long cartId, int quantity, List<Product> products, User user) {
+  private double totalprice = 0;
+
+  public Cart(Long cartId, List<CartItem> items, User user) {
     this.cartId = cartId;
-    this.quantity = quantity;
-    this.products = products != null ? products : new ArrayList<>();
+    this.items = items != null ? items : new ArrayList<>();
     this.user = user;
   }
 
@@ -46,20 +46,12 @@ public class Cart {
     this.cartId = cartId;
   }
 
-  public int getQuantity() {
-    return quantity;
+  public List<CartItem> getItems() {
+    return items;
   }
 
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
-
-  public List<Product> getProducts() {
-    return products;
-  }
-
-  public void setProducts(List<Product> products) {
-    this.products = products;
+  public void setItems(List<CartItem> items) {
+    this.items = items;
   }
 
   public User getUser() {
@@ -68,6 +60,14 @@ public class Cart {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public double getTotalPrice() {
+    return totalprice;
+  }
+
+  public void setTotalPrice(double totalprice) {
+    this.totalprice = totalprice;
   }
 
 }

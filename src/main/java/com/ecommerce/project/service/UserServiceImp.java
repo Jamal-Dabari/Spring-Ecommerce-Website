@@ -1,6 +1,7 @@
 package com.ecommerce.project.service;
 
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
+import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.UserRepository;
@@ -25,12 +26,19 @@ public class UserServiceImp implements UserDetailsService {
   private UserRepository userRepository;
   @Autowired
   private PasswordEncoder passwordEncoder;
+  @Autowired
+  private CartService cartService;
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
   }
 
   public User createUser(RegistrationBox registrationBox) {
+
+    if (userRepository.findByEmail(registrationBox.getEmail()).isPresent()) {
+      throw new EmailAlreadyTakenException();
+    }
+
     User user = new User();
     user.setUserId(newId++);
     user.setUsername(registrationBox.getUsername());
@@ -40,10 +48,16 @@ public class UserServiceImp implements UserDetailsService {
     String encodedPassword = passwordEncoder.encode(registrationBox.getPassword());
     user.setPassword(encodedPassword);
 
+    User newUser = userRepository.save(user);
+    Cart cart = new Cart();
+    cart.setUser(newUser);
+    cart.setQuantity(0);
+    cartService.createCart(cart);
+
     if (userRepository.findByEmail(user.getEmail()) == null) {
       throw new EmailAlreadyTakenException();
     } else {
-      return userRepository.save(user);
+      return newUser;
     }
   }
 

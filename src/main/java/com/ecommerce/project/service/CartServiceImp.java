@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.project.model.Cart;
+import com.ecommerce.project.model.CartItem;
 import com.ecommerce.project.model.Product;
 import com.ecommerce.project.repositories.CartRepository;
+import com.ecommerce.project.repositories.ProductRepository;
 
 @Service
 public class CartServiceImp implements CartService {
@@ -15,39 +17,61 @@ public class CartServiceImp implements CartService {
   @Autowired
   private CartRepository cartRepository;
 
+  @Autowired
+  private ProductRepository productRepository;
+
   @Override
   public Double getTotalPrice(Long cartId) {
     Cart cart = cartRepository.findByCartId(cartId);
-    return cart.getProducts().stream().mapToDouble(Product::getProductPrice).sum();
+    return cart.getItems().stream().mapToDouble(CartItem::getPrice).sum();
+  }
+
+  public Double setTotalPrice(long cartId) {
+    double price = 0.0;
+    return price;
   }
 
   @Override
-  public void addProducts(Product product, Long cartId) {
+  public void addProducts(long cartId, long productId, int quantity) {
     Cart cart = cartRepository.findByCartId(cartId);
-    cart.getProducts().add(product);
-    cart.setQuantity(cart.getQuantity() + 1);
+    Product product = productRepository.findById(productId).orElseThrow();
+
+    CartItem item = new CartItem();
+    item.setProduct(product);
+    item.setQuantity(quantity);
+    item.setPrice(product.getProductPrice() * quantity);
+
+    cart.getItems().add(item);
+    cart.setTotalPrice(getTotalPrice(cartId) + item.getPrice());
+
     cartRepository.save(cart);
   }
 
   @Override
   public void removeProducts(Product product, Long cartId) {
     Cart cart = cartRepository.findByCartId(cartId);
-    cart.getProducts().remove(product);
-    cart.setQuantity(cart.getQuantity() - 1);
-    cartRepository.delete(cart);
+
+    if (cart == null) {
+      throw new IllegalArgumentException("Cart not found for ID " + cartId);
+    }
+
+    cart.getItems().removeIf(item -> item.getProduct().equals(product));
+    cart.setTotalPrice(getTotalPrice(cartId)); // Recalculate the total price after removal
+    cartRepository.save(cart);
   }
 
   @Override
   public Cart getCartById(Long cartId) {
-    return cartRepository.findByCartId(cartId);
+    Cart cart = cartRepository.findByCartId(cartId);
+    if (cart == null) {
+      throw new IllegalArgumentException("cart not found");
+    }
+    return cart;
   }
 
   @Override
   public Cart createCart(Cart cart) {
-    cart.setUser(cart.getUser());
     cart.setCartId(newId++);
-    cart.setProducts(cart.getProducts());
-    cart.setQuantity(cart.getQuantity());
     return cartRepository.save(cart);
   }
 }

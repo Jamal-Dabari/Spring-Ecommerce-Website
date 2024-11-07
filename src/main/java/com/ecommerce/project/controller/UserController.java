@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.project.service.UserServiceImp;
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
@@ -20,7 +21,7 @@ import com.ecommerce.project.exceptions.UsernameNotFoundException;
 import com.ecommerce.project.model.RegistrationBox;
 import com.ecommerce.project.model.User;
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class UserController {
 
@@ -47,7 +48,8 @@ public class UserController {
   @PostMapping("/public/register")
   public String createUser(@ModelAttribute RegistrationBox registrationBox) {
     userService.createUser(registrationBox);
-    return "redirect:/";
+    return "User has been created";
+    // return "redirect:/";
   }
 
   @PostMapping("/public/login")
