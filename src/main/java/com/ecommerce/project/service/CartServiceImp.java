@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.project.DTO.AddProductRequestDTO;
 import com.ecommerce.project.exceptions.CartNotFoundException;
 import com.ecommerce.project.exceptions.ProductNotFoundException;
+import com.ecommerce.project.exceptions.UsernameNotFoundException;
 import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.CartItem;
 import com.ecommerce.project.model.Product;
@@ -93,7 +94,7 @@ public class CartServiceImp implements CartService {
   @Override
   public List<CartItem> viewCart(String username) {
     // Retrieve user by username
-    User user = userRepository.findByUsername(username);
+    User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException());
 
     // Find cart by user
     Cart cart = cartRepository.findByUser(user);

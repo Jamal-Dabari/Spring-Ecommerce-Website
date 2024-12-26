@@ -58,16 +58,21 @@ public class OrderServiceImp implements OrderService {
 
   @Override
   public Order modifyOrder(long order_id, long product_id, int quantity) {
+    Order order = new Order();
+    return order;
 
   }
 
   @Override
   public double updateProductQuantity(long productid) {
+    return 2.0;
 
   }
 
   @Override
   public Cart clearCart(long userId) {
+    Cart cart = new Cart();
+    return cart;
 
   }
 
