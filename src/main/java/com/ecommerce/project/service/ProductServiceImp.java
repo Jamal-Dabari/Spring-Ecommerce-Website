@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.project.DTO.ProductDTO;
 import com.ecommerce.project.exceptions.ProductDoesNotExistException;
+import com.ecommerce.project.model.Category;
 import com.ecommerce.project.model.Product;
 import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.repositories.ProductRepository;
@@ -30,13 +32,16 @@ public class ProductServiceImp implements ProductService {
   }
 
   @Override
-  public void createProduct(Product product) {
-    product.setProductId(nextId++);
-    // product.setProductName(product.getProductName());
-    // product.setProductPrice(product.getProductPrice());
-    // product.setProductQuantity(product.getProductQuantity());
-    // product.setCategory(product.getCategory());
-    // categoryRepository.save(product.getCategory());
+  public void createProduct(ProductDTO productDTO) {
+    Category category = categoryRepository.findById(productDTO.getCategoryId())
+        .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+
+    Product product = new Product();
+    product.setProductName(productDTO.getProductName());
+    product.setProductPrice(productDTO.getProductPrice());
+    product.setProductQuantity(productDTO.getProductQuantity());
+    product.setCategory(category);
+
     productRepository.save(product);
   }
 

@@ -1,13 +1,22 @@
 package com.ecommerce.project.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.project.DTO.AddProductRequestDTO;
+import com.ecommerce.project.exceptions.CartNotFoundException;
+import com.ecommerce.project.exceptions.ProductNotFoundException;
 import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.CartItem;
 import com.ecommerce.project.model.Product;
+import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.CartRepository;
 import com.ecommerce.project.repositories.ProductRepository;
+import com.ecommerce.project.repositories.UserRepository;
 
 @Service
 public class CartServiceImp implements CartService {
@@ -19,6 +28,9 @@ public class CartServiceImp implements CartService {
 
   @Autowired
   private ProductRepository productRepository;
+
+  @Autowired
+  private UserRepository userRepository;
 
   @Override
   public Double getTotalPrice(Long cartId) {
@@ -32,19 +44,22 @@ public class CartServiceImp implements CartService {
   }
 
   @Override
-  public void addProducts(long cartId, long productId, int quantity) {
-    Cart cart = cartRepository.findByCartId(cartId);
-    Product product = productRepository.findById(productId).orElseThrow();
+  public Cart addProducts(AddProductRequestDTO prd) {
+    Cart cart = cartRepository.findById(prd.getCart_id())
+        .orElseThrow(() -> new IllegalArgumentException("Cart not found"));
 
-    CartItem item = new CartItem();
-    item.setProduct(product);
-    item.setQuantity(quantity);
-    item.setPrice(product.getProductPrice() * quantity);
+    Product product = productRepository.findById(prd.getProductId())
+        .orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
-    cart.getItems().add(item);
-    cart.setTotalPrice(getTotalPrice(cartId) + item.getPrice());
+    CartItem cartItem = new CartItem();
+    cartItem.setProduct(product);
+    cartItem.setQuantity(prd.getQuantity());
+    cartItem.setPrice(product.getProductPrice() * prd.getQuantity());
+    cartItem.setCart(cart);
+    cart.getItems().add(cartItem);
 
     cartRepository.save(cart);
+    return cart;
   }
 
   @Override
@@ -74,4 +89,22 @@ public class CartServiceImp implements CartService {
     cart.setCartId(newId++);
     return cartRepository.save(cart);
   }
+
+  @Override
+  public List<CartItem> viewCart(String username) {
+    // Retrieve user by username
+    User user = userRepository.findByUsername(username);
+
+    // Find cart by user
+    Cart cart = cartRepository.findByUser(user);
+
+    // Check if cart exists for the user
+    if (cart == null) {
+      throw new IllegalArgumentException("Cart not found for user " + username);
+    }
+
+    // Return cart items (initialize to empty list if null)
+    return cart.getItems() != null ? cart.getItems() : new ArrayList<>();
+  }
+
 }

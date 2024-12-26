@@ -5,12 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +27,9 @@ public class UserController {
   private UserServiceImp userService;
 
   @GetMapping("/admin/users")
-  public List<User> getAllUsers() {
-    return userService.getAllUsers();
+  public ResponseEntity<List<User>> getAllUsers() {
+    List<User> users = userService.getAllUsers();
+    return ResponseEntity.ok(users);
   }
 
   @ExceptionHandler({ EmailAlreadyTakenException.class })
@@ -41,24 +40,23 @@ public class UserController {
 
   @GetMapping("/public/register")
   public String showRegistrationForm() {
-    return "Registration"; // Returns the registration.html page
+    return "Registration";
   }
 
-  // @Autowired
   @PostMapping("/public/register")
-  public String createUser(@ModelAttribute RegistrationBox registrationBox) {
+  public ResponseEntity<String> createUser(@RequestBody RegistrationBox registrationBox) {
+
     userService.createUser(registrationBox);
-    return "User has been created";
-    // return "redirect:/";
+    return new ResponseEntity<>("User has been created", HttpStatus.CREATED);
   }
 
   @PostMapping("/public/login")
-  public String loginUser(@RequestParam String username, @RequestParam String password) {
+  public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
     try {
-      UserDetails user = userService.loginUser(username, password); // Change to UserDetails
-      return "redirect:/";
+      userService.loginUser(username, password);
+      return ResponseEntity.ok("Login successful");
     } catch (UsernameNotFoundException e) {
-      return "fail";
+      return new ResponseEntity<>("Login Failed: User not found", HttpStatus.UNAUTHORIZED);
     }
   }
 

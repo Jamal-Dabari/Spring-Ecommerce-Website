@@ -3,6 +3,7 @@ package com.ecommerce.project.service;
 import com.ecommerce.project.exceptions.EmailAlreadyTakenException;
 import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.RegistrationBox;
+import com.ecommerce.project.model.Role;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.UserRepository;
 import com.ecommerce.project.exceptions.EmailNotFoundException;
@@ -45,24 +46,23 @@ public class UserServiceImp implements UserDetailsService {
     user.setFname(registrationBox.getFname());
     user.setLname(registrationBox.getLname());
     user.setEmail(registrationBox.getEmail());
+    user.setRole(Role.User);
+
     String encodedPassword = passwordEncoder.encode(registrationBox.getPassword());
     user.setPassword(encodedPassword);
 
     User newUser = userRepository.save(user);
+
     Cart cart = new Cart();
     cart.setUser(newUser);
-    cart.setQuantity(0);
     cartService.createCart(cart);
 
-    if (userRepository.findByEmail(user.getEmail()) == null) {
-      throw new EmailAlreadyTakenException();
-    } else {
-      return newUser;
-    }
+    return newUser;
   }
 
   public UserDetails loginUser(String username, String password) {
-    UserDetails user = userRepository.findByUsername(username);
+    User user = userRepository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException("hey i couldnt find the username"));
 
     if (user != null && passwordEncoder.matches(password, user.getPassword())) {
       return user;
@@ -89,12 +89,8 @@ public class UserServiceImp implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    try {
-      return userRepository.findByUsername(username);
-    } catch (UsernameNotFoundException e) {
-      throw new UsernameNotFoundException("hi");
-    }
-
+    return userRepository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException("i couldnt find this username"));
   }
 
   public Optional<User> loadUserByEmail(String email) throws EmailNotFoundException {

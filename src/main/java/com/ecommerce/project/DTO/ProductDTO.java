@@ -1,26 +1,26 @@
 package com.ecommerce.project.DTO;
 
 public class ProductDTO {
-  private String name;
-  private double price;
+  private String productName;
+  private double productPrice;
   private Long productQuantity;
   private Long categoryId;
 
   // Getters and Setters
-  public String getName() {
-    return name;
+  public String getProductName() {
+    return productName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setProductName(String productName) {
+    this.productName = productName;
   }
 
-  public double getPrice() {
-    return price;
+  public double getProductPrice() {
+    return productPrice;
   }
 
-  public void setPrice(double price) {
-    this.price = price;
+  public void setProductPrice(double productPrice) {
+    this.productPrice = productPrice;
   }
 
   public Long getCategoryId() {

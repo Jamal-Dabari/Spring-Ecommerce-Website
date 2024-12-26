@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.project.DTO.ProductDTO;
 import com.ecommerce.project.exceptions.ProductDoesNotExistException;
-import com.ecommerce.project.model.Category;
 import com.ecommerce.project.model.Product;
 import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.service.ProductService;
@@ -42,25 +41,16 @@ public class ProductController {
     } catch (ProductDoesNotExistException e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
   }
 
   @PostMapping("/public/product")
   public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
-    Product product = new Product();
-    if (productDTO.getCategoryId() != null) {
-      Category category = categoryRepository.findById(productDTO.getCategoryId())
-          .orElseThrow(() -> new RuntimeException("Category Not Found"));
-      product.setCategory(category);
-    } else {
-      product.setCategory(null);
+    try {
+      productServiceImp.createProduct(productDTO);
+      return new ResponseEntity<>("Product Created", HttpStatus.CREATED);
+    } catch (IllegalArgumentException e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-
-    product.setProductName(productDTO.getName());
-    product.setProductPrice(productDTO.getPrice());
-    product.setProductQuantity(productDTO.getProductQuantity());
-    productServiceImp.createProduct(product);
-    return new ResponseEntity<>("Product Created", HttpStatus.CREATED);
   }
 
   @DeleteMapping("/public/product/{productId}")

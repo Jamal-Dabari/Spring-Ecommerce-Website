@@ -6,6 +6,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 @Entity(name = "Users")
@@ -30,8 +32,11 @@ public class User implements UserDetails {
   private String email;
   @Enumerated(EnumType.STRING)
   private Role role;
-  private Boolean locked;
-  private Boolean enabled;
+  private Boolean locked = false;
+  private Boolean enabled = true;
+
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Cart cart;
 
   public User(String fname, String lname, Long userId, String password, String email, String username, Role role,
       Boolean locked, Boolean enabled) {
